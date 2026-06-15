@@ -1,0 +1,70 @@
+# DAO: Data Access Object
+# Es una clase que se encarga de acceder a la base de datos y realizar operaciones
+
+from database.conexion import Conexion
+from models.libro import Libro 
+
+class LibroDAO:
+
+
+    # Select * from libros
+    def __obtener_libros(self):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+
+        #Ejecuta la consulta
+        cursor.execute("SELECT * FROM libros")
+        #Obtiene los resultados
+        registros = cursor.fetchall()
+
+        #Crear una lista de clase libro
+        libros = []
+        for registro in registros:
+            libro = Libro ( id=registro[0], titulo=registro[1], autor=registro[2], isbn=registro[3], disponible=registro[4])
+            libros.append(libro)
+
+            cursor.close()
+            conexion.close()
+            return libros
+        
+    #Insert
+    def insertar(self, libro):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+        sql = """
+        INSERT INTO libro(titulo,autor,isbn,disponible)
+        VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(sql,(libro.titulo, libro.autor, libro.isbn, libro.disponible))
+
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+
+    def actualizar(self,libro):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+        sql = """
+                UPDATE libro
+                SET titulo = %s, autor = %x, isb = %s, disponible = %s
+                WHERE id = %s
+        """
+
+        cursor.execute(sql,(libro.titulo, libro.autor, libro.isbn, libro.dispnible, libro.id))
+
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+
+    def eliminar(self, id):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+
+        cursor.execute("DELETE FROM libro WHERE ID = %s", (id))
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+        
+        
+
+        
