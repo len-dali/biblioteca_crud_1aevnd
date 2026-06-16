@@ -8,12 +8,12 @@ class LibroDAO:
 
 
     # Select * from libros
-    def __obtener_libros(self):
+    def obtener_libros(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
 
         #Ejecuta la consulta
-        cursor.execute("SELECT * FROM libros")
+        cursor.execute("SELECT * FROM libro")
         #Obtiene los resultados
         registros = cursor.fetchall()
 
@@ -25,7 +25,7 @@ class LibroDAO:
 
             cursor.close()
             conexion.close()
-            return libros
+        return libros
         
     #Insert
     def insertar(self, libro):
@@ -46,11 +46,11 @@ class LibroDAO:
         cursor = conexion.cursor()
         sql = """
                 UPDATE libro
-                SET titulo = %s, autor = %x, isb = %s, disponible = %s
+                SET titulo = %s, autor = %s, isb = %s, disponible = %s
                 WHERE id = %s
         """
 
-        cursor.execute(sql,(libro.titulo, libro.autor, libro.isbn, libro.dispnible, libro.id))
+        cursor.execute(sql,(libro.titulo, libro.autor, libro.isbn, libro.disponible, libro.id))
 
         conexion.commit()
         cursor.close()
@@ -64,7 +64,7 @@ class LibroDAO:
         conexion.commit()
         cursor.close()
         conexion.close()
-        
+
         
 
         

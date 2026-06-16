@@ -4,7 +4,7 @@ from models.libro import Libro
 def main():
     try: 
         libro_dao = LibroDAO()
-        libros = libro_dao.__obtener_libros()
+        libros = libro_dao.obtener_libros()
 
         print("LIBROS EN LA BBIBLIOTECA: ")
         if len(libros) == 0: 
