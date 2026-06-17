@@ -23,8 +23,8 @@ class LibroDAO:
             libro = Libro ( id=registro[0], titulo=registro[1], autor=registro[2], isbn=registro[3], disponible=registro[4])
             libros.append(libro)
 
-            cursor.close()
-            conexion.close()
+        cursor.close()
+        conexion.close()
         return libros
         
     #Insert
@@ -65,6 +65,14 @@ class LibroDAO:
         cursor.close()
         conexion.close()
 
-        
+    #UPDATE
+    def actualizar(self, libro):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
 
+        sql = """
+        UPDATE libro
+        SET titulo=%s, autor=%s, isbn=%s, disponible=%s
         
+        
+        """
