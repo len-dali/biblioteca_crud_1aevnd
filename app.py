@@ -195,19 +195,9 @@ def menu_usuarios():
         case 2: insertar_usuario(usuario_dao)
         case 3: actualizar_usuario(usuario_dao)
         case 4: eliminar_usuario(usuario_dao)
-    
-def main():
-    ft.app(target=main_window)
-    # print("==BIBLIOTECA UNIVERSITARIA==")
-    # print("====== MENÚ DE OPCIONES======")
-    # print("1. Gestión de libros")
-    # print("2. Gestion de usuarios")
 
-    # opcion = int(input("Escribe tu opción: "))
-
-    # match opcion:
-    #     case 1: menu_libros()
-    #     case 2: menu_usuarios()
+def main(page: ft.Page):
+    main_window(page)
 
 if __name__ == "__main__":
-    main()
+    ft.app(target=main)
